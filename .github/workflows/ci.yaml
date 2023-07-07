@@ -81,4 +81,3 @@ jobs:
       - name: Run suite
         run: |
           make test
-
