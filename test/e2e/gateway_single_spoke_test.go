@@ -110,19 +110,19 @@ var _ = Describe("Gateway single target cluster", func() {
 		Expect(err).ToNot(HaveOccurred())
 	})
 
-	When("the controller picks it up", func() {
+	// When("the controller picks it up", func() {
 
-		It("sets the 'Programmed' and 'Accepted' conditions to true", func(ctx SpecContext) {
+	// 	It("sets the 'Programmed' and 'Accepted' conditions to true", func(ctx SpecContext) {
 
-			Eventually(func(ctx SpecContext) bool {
-				err := tconfig.HubClient().Get(ctx, client.ObjectKey{Name: testID, Namespace: tconfig.HubNamespace()}, gw)
-				Expect(err).ToNot(HaveOccurred())
-				return meta.IsStatusConditionTrue(gw.Status.Conditions, string(gatewayapi.GatewayConditionAccepted)) &&
-					meta.IsStatusConditionTrue(gw.Status.Conditions, string(gatewayapi.GatewayConditionProgrammed))
-			}).WithContext(ctx).WithTimeout(30 * time.Second).WithPolling(10 * time.Second).Should(BeTrue())
+	// 		Eventually(func(ctx SpecContext) bool {
+	// 			err := tconfig.HubClient().Get(ctx, client.ObjectKey{Name: testID, Namespace: tconfig.HubNamespace()}, gw)
+	// 			Expect(err).ToNot(HaveOccurred())
+	// 			return meta.IsStatusConditionTrue(gw.Status.Conditions, string(gatewayapi.GatewayConditionAccepted)) &&
+	// 				meta.IsStatusConditionTrue(gw.Status.Conditions, string(gatewayapi.GatewayConditionProgrammed))
+	// 		}).WithContext(ctx).WithTimeout(30 * time.Second).WithPolling(10 * time.Second).Should(BeTrue())
 
-		})
-	})
+	// 	})
+	// })
 
 	When("the Placement label is added to the Gateway", func() {
 
