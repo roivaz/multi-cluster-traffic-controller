@@ -9,7 +9,8 @@ on:
       - '**.md'
       - 'samples/**'
       - 'LICENSE'
-  pull_request:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
     branches:
       - main
     paths-ignore:
@@ -23,7 +24,9 @@ jobs:
     name: lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.ref }}
       - uses: actions/setup-go@v4
         with:
           go-version: v1.19
@@ -43,7 +46,9 @@ jobs:
           go-version: 1.19.x
         id: go
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.ref }}
       - name: Run make verify-code
         run: |
           make verify-code
@@ -57,7 +62,9 @@ jobs:
           go-version: 1.19.x
         id: go
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.ref }}
       - name: Run make verify-manifests
         run: |
           make verify-manifests
@@ -65,7 +72,9 @@ jobs:
     name: Test Suite
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.ref }}
       - uses: actions/setup-go@v4
         with:
           go-version: v1.19

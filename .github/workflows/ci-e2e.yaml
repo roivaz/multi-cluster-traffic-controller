@@ -1,5 +1,4 @@
 name: CI-E2E
-
 on:
   push:
     branches:
