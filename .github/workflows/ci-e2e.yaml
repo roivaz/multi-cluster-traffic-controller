@@ -19,6 +19,10 @@ on:
       - 'LICENSE'
 
 jobs:
+  event_payload:
+    runs-on: ubuntu-latest
+    steps:
+      - run: cat $GITHUB_EVENT_PATH
   authorize:
     environment:
       ${{ github.event_name == 'pull_request_target' &&
