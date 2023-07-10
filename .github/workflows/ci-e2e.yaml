@@ -21,7 +21,6 @@ on:
 jobs:
   e2e_test_suite:
     name: E2E Test Suite
-    needs: authorize
     runs-on: ubuntu-latest
     # see https://docs.github.com/en/graphql/reference/enums#commentauthorassociation
     # for info on author association
